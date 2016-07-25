@@ -105,7 +105,7 @@ public final class CLIReportingUtils
         {
             msg += " (";
             msg += ( rev != null ? rev : "" );
-            if ( timestamp != null )
+            if ( timestamp != null && !timestamp.isEmpty())
             {
                 String ts = formatTimestamp( Long.valueOf( timestamp ) );
                 msg += ( rev != null ? "; " : "" ) + ts;

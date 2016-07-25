@@ -19,25 +19,9 @@ package org.apache.maven;
  * under the License.
  */
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Iterables;
 import org.apache.maven.artifact.ArtifactUtils;
-import org.apache.maven.execution.DefaultMavenExecutionResult;
-import org.apache.maven.execution.ExecutionEvent;
-import org.apache.maven.execution.MavenExecutionRequest;
-import org.apache.maven.execution.MavenExecutionResult;
-import org.apache.maven.execution.MavenSession;
-import org.apache.maven.execution.ProjectDependencyGraph;
+import org.apache.maven.execution.*;
 import org.apache.maven.graph.GraphBuilder;
 import org.apache.maven.internal.aether.DefaultRepositorySystemSessionFactory;
 import org.apache.maven.lifecycle.internal.ExecutionEventCatapult;
@@ -59,7 +43,8 @@ import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.repository.WorkspaceReader;
 import org.eclipse.aether.util.repository.ChainedWorkspaceReader;
 
-import com.google.common.collect.Iterables;
+import java.io.File;
+import java.util.*;
 
 /**
  * @author Jason van Zyl
@@ -203,10 +188,9 @@ public class DefaultMaven
     {
         try
         {
-            for ( AbstractMavenLifecycleParticipant listener : getLifecycleParticipants( Collections
-                .<MavenProject>emptyList() ) )
-            {
-                listener.afterSessionStart( session );
+            for (AbstractMavenLifecycleParticipant listener : getLifecycleParticipants(
+                    Collections.<MavenProject>emptyList())) {
+                listener.afterSessionStart(session);
             }
         }
         catch ( MavenExecutionException e )

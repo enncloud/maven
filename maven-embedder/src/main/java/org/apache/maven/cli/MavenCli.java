@@ -213,6 +213,11 @@ public class MavenCli
         MavenCli cli = new MavenCli();
 
         MessageUtils.systemInstall();
+        for (String arg : args) {
+            System.out.println("xfguo: arg = " + arg);
+        }
+
+        System.out.println("xfguo: classWorld = " + classWorld);
         int result = cli.doMain( new CliRequest( args, classWorld ) );
         MessageUtils.systemUninstall();
 
@@ -314,6 +319,7 @@ public class MavenCli
         }
         catch ( ExitException e )
         {
+            e.printStackTrace();
             return e.exitCode;
         }
         catch ( UnrecognizedOptionException e )
@@ -323,12 +329,14 @@ public class MavenCli
         }
         catch ( BuildAbort e )
         {
+            e.printStackTrace();
             CLIReportingUtils.showError( slf4jLogger, "ABORTED", e, cliRequest.showErrors );
 
             return 2;
         }
         catch ( Exception e )
         {
+            e.printStackTrace();
             CLIReportingUtils.showError( slf4jLogger, "Error executing Maven.", e, cliRequest.showErrors );
 
             return 1;

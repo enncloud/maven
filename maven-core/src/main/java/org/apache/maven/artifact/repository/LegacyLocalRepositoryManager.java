@@ -291,6 +291,7 @@ public class LegacyLocalRepositoryManager
 
         private final RemoteRepository repository;
 
+        // TODO(lamuguo): Add P2P remote repository if we have resource to do this.
         public ArtifactRepositoryAdapter( RemoteRepository repository )
         {
             this.repository = repository;

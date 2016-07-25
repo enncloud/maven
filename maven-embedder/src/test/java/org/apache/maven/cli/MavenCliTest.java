@@ -107,4 +107,16 @@ public class MavenCliTest
 
         }
     }
+
+    public void testMavenDoMain() throws Exception {
+        try {
+            String[] args = {"-e", "install"};
+            CliRequest request = new CliRequest(args, null);
+            request.multiModuleProjectDirectory = new File("src/examples/simple-project");
+            cli.doMain(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }
